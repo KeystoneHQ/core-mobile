@@ -67,6 +67,12 @@ class Logger {
   }
 
   error = (message: string, value?: any): void => {
+    // @ts-expect-error
+    // eslint-disable-next-line no-alert
+    alert(message)
+    // @ts-expect-error
+    // eslint-disable-next-line no-alert
+    alert(value)
     if (this.shouldLog(LogLevel.ERROR)) {
       console.groupCollapsed(...formatMessage(message, 'red'))
       value && console.error(value)

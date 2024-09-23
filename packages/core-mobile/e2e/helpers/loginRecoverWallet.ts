@@ -9,11 +9,15 @@ import existingRecoveryPhrasePage from '../pages/existingRecoveryPhrase.page'
 import Actions from '../helpers/actions'
 
 class LoginRecoverWallet {
-  async recoverMnemonicWallet() {
+  async recoverMnemonicWallet(analyticsConsent: boolean) {
     const recoveryPhrase: string = process.env.E2E_MNEMONIC as string
     await ExistingRecoveryPhrasePage.tapAccessExistingWallet()
     await ExistingRecoveryPhrasePage.tapRecoveryPhraseBtn()
-    await AnalyticsConsentPage.tapNoThanksBtn()
+    if (analyticsConsent) {
+      await AnalyticsConsentPage.tapUnlockBtn()
+    } else {
+      await AnalyticsConsentPage.tapNoThanksBtn()
+    }
     await ExistingRecoveryPhrasePage.enterRecoveryPhrase(recoveryPhrase)
     await ExistingRecoveryPhrasePage.tapSignInBtn()
     await nameWalletPage.enterWalletName('testWallet1\n')
@@ -29,7 +33,7 @@ class LoginRecoverWallet {
     await commonElsPage.checkIfMainnet()
   }
 
-  async recoverWalletLogin() {
+  async recoverWalletLogin(analyticsConsent = false) {
     const isVisibleNo = await Actions.expectToBeVisible(
       existingRecoveryPhrasePage.forgotPinBtn
     )
@@ -38,7 +42,7 @@ class LoginRecoverWallet {
       await this.enterPin()
       await accountManagePage.switchToFirstAccount()
     } else {
-      await this.recoverMnemonicWallet()
+      await this.recoverMnemonicWallet(analyticsConsent)
     }
   }
 }

@@ -27,7 +27,8 @@ module.exports = {
         'camelcase-keys',
         'map-obj',
         'camelcase',
-        'quick-lru'
+        'quick-lru',
+        'react-native-inappbrowser-reborn'
       ].join('|') +
       ')'
   ]

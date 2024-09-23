@@ -6,7 +6,7 @@ import Action from './actions'
 import { Platform } from './constants'
 import loginRecoverWallet from './loginRecoverWallet'
 
-export const warmup = async (newInstance = false) => {
+export const warmup = async (newInstance = false, analyticsConsent = false) => {
   const permissions: DevicePermissions = { notifications: 'YES', camera: 'YES' }
   const initialArgs: DeviceLaunchAppConfig = {
     permissions: permissions,
@@ -18,7 +18,7 @@ export const warmup = async (newInstance = false) => {
       ]
     }
   }
-  if (newInstance) {
+  if (newInstance && device.getPlatform() === Platform.Android) {
     initialArgs.newInstance = true
   }
   await device.launchApp(initialArgs)
@@ -31,7 +31,7 @@ export const warmup = async (newInstance = false) => {
     console.log('Jailbroken warning handled!!!')
   }
   try {
-    await loginRecoverWallet.recoverWalletLogin()
+    await loginRecoverWallet.recoverWalletLogin(analyticsConsent)
   } catch (e) {
     console.log('Skipped login process...')
   }

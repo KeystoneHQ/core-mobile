@@ -30,6 +30,18 @@ class BurgerMenuPage {
     return by.text(burgerMenu.securityAndPrivacy)
   }
 
+  get sendFeedback() {
+    return by.text(burgerMenu.sendFeedback)
+  }
+
+  get legal() {
+    return by.text(burgerMenu.legal)
+  }
+
+  get helpCenter() {
+    return by.text(burgerMenu.helpCenter)
+  }
+
   async swipeLeft() {
     await Actions.swipeLeft(
       by.id(burgerMenu.carrotSvg),
@@ -50,6 +62,18 @@ class BurgerMenuPage {
   async tapBurgerMenuButton() {
     await Actions.waitForElement(this.burgerMenuButton, 10000)
     await Actions.tapElementAtIndex(this.burgerMenuButton, 0)
+  }
+
+  async tapSendFeedback() {
+    await Actions.tapElementAtIndex(this.sendFeedback, 0)
+  }
+
+  async tapLegal() {
+    await Actions.tapElementAtIndex(this.legal, 0)
+  }
+
+  async tapHelpCenter() {
+    await Actions.tapElementAtIndex(this.helpCenter, 0)
   }
 
   async tapCurrency() {

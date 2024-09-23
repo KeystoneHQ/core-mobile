@@ -1,16 +1,15 @@
-import advancedLoc from '../../locators/burgerMenu/advanced.loc'
 import Actions from '../../helpers/actions'
 import commonElsPage from '../commonEls.page'
 import Assert from '../../helpers/assertions'
 import BurgerMenuPage from './burgerMenu.page'
 
 class Advanced {
-  get switchButton() {
-    return by.id(advancedLoc.switchButton)
+  async tapSwitchToTestnetButton() {
+    await Actions.tapElementAtIndex(commonElsPage.disabledSwitch, 0)
   }
 
-  async tapSwitchToTestnetButton() {
-    await Actions.tapElementAtIndex(this.switchButton, 0)
+  async tapSwitchToMainnetButton() {
+    await Actions.tapElementAtIndex(commonElsPage.enabledSwitch, 0)
   }
 
   async switchToTestnet() {
@@ -19,7 +18,7 @@ class Advanced {
     } catch (error) {
       await BurgerMenuPage.tapBurgerMenuButton()
       await BurgerMenuPage.tapAdvanced()
-      await Actions.waitForElement(this.switchButton)
+      await Actions.waitForElement(commonElsPage.disabledSwitch)
       await this.tapSwitchToTestnetButton()
       await BurgerMenuPage.tapBackbutton()
       await BurgerMenuPage.swipeLeft()
@@ -31,8 +30,8 @@ class Advanced {
       await Assert.isVisible(commonElsPage.testnetBanner)
       await BurgerMenuPage.tapBurgerMenuButton()
       await BurgerMenuPage.tapAdvanced()
-      await Actions.waitForElement(this.switchButton)
-      await this.tapSwitchToTestnetButton()
+      await Actions.waitForElement(commonElsPage.enabledSwitch)
+      await this.tapSwitchToMainnetButton()
       await BurgerMenuPage.exitBurgerMenu()
     } catch (e) {
       console.log('You are on mainnet')

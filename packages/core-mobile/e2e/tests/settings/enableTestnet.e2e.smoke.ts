@@ -1,10 +1,12 @@
-import Assert from '../../helpers/assertions'
-import NetworksManagePage from '../../pages/networksManage.page'
+import assert from '../../helpers/assertions'
+import action from '../../helpers/actions'
+import networksManagePage from '../../pages/networksManage.page'
 import PortfolioPage from '../../pages/portfolio.page'
 import { warmup } from '../../helpers/warmup'
-import AdvancedPage from '../../pages/burgerMenu/advanced.page'
+import advancedPage from '../../pages/burgerMenu/advanced.page'
 import commonElsPage from '../../pages/commonEls.page'
 import bottomTabsPage from '../../pages/bottomTabs.page'
+import burgerMenuPage from '../../pages/burgerMenu/burgerMenu.page'
 
 describe('Enable Testnet', () => {
   beforeAll(async () => {
@@ -14,22 +16,39 @@ describe('Enable Testnet', () => {
   afterAll(async () => {
     await commonElsPage.tapBackButton()
     await bottomTabsPage.tapPortfolioTab()
-    await AdvancedPage.switchToMainnet()
+    await advancedPage.switchToMainnet()
+  })
+
+  it('should store toggle', async () => {
+    await burgerMenuPage.tapBurgerMenuButton()
+    await burgerMenuPage.tapAdvanced()
+    await action.waitForElement(commonElsPage.disabledSwitch)
+    await advancedPage.tapSwitchToTestnetButton()
+    await assert.isVisible(commonElsPage.testnetBanner)
+    await assert.isVisible(commonElsPage.enabledSwitch)
+    await burgerMenuPage.exitBurgerMenu()
+
+    await burgerMenuPage.tapBurgerMenuButton()
+    await burgerMenuPage.tapAdvanced()
+    await action.waitForElement(commonElsPage.enabledSwitch)
+    await advancedPage.tapSwitchToMainnetButton()
+    await assert.isNotVisible(commonElsPage.testnetBanner)
+    await assert.isVisible(commonElsPage.disabledSwitch)
   })
 
   it('Should verify Avax Network', async () => {
-    await AdvancedPage.switchToTestnet()
+    await advancedPage.switchToTestnet()
     await PortfolioPage.tapAvaxNetwork()
-    await Assert.isVisible(PortfolioPage.avaxNetwork)
+    await assert.isVisible(PortfolioPage.avaxNetwork)
   })
 
   it('Should verify Bitcoin & Eth Sepolia Networks', async () => {
     await PortfolioPage.tapNetworksDropdown()
     await PortfolioPage.tapManageNetworks()
-    await NetworksManagePage.tapNetworksTab()
-    await NetworksManagePage.searchNetworks('Ethereum Sepolia')
-    await Assert.count(NetworksManagePage.ethereumSepoliaNetwork, 2)
-    await NetworksManagePage.searchNetworks('Bitcoin Testnet')
-    await Assert.count(NetworksManagePage.bitcoinTestnetNetwork, 2)
+    await networksManagePage.tapNetworksTab()
+    await networksManagePage.searchNetworks('Ethereum Sepolia')
+    await assert.count(networksManagePage.ethereumSepoliaNetwork, 2)
+    await networksManagePage.searchNetworks('Bitcoin Testnet')
+    await assert.count(networksManagePage.bitcoinTestnetNetwork, 2)
   })
 })

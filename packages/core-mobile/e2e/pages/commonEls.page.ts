@@ -38,6 +38,30 @@ class CommonElsPage {
     return by.id(commonEls.testnetBanner)
   }
 
+  get enabledSwitch() {
+    return by.id(commonEls.enabledSwitch)
+  }
+
+  get disabledSwitch() {
+    return by.id(commonEls.disabledSwitch)
+  }
+
+  async isSwitchOn(switchOn = true) {
+    if (switchOn) {
+      await Actions.waitForElement(this.enabledSwitch)
+    } else {
+      await Actions.waitForElement(this.disabledSwitch)
+    }
+  }
+
+  async tapSwitch(on: boolean) {
+    if (on) {
+      await Actions.tapElementAtIndex(this.disabledSwitch, 0)
+    } else {
+      await Actions.tapElementAtIndex(this.enabledSwitch, 0)
+    }
+  }
+
   async tapBackButton(index = 0) {
     await Actions.tapElementAtIndex(this.backButton, index)
   }

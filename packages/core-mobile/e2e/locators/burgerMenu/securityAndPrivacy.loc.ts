@@ -2,7 +2,7 @@ export default {
   changePin: 'Change PIN',
   connectedSites: 'Connected Sites',
   showRecoveryPhrase: 'Show recovery phrase',
-  participateInCoreAnalytics: 'Participate in CoreAnalytics',
+  participateInCoreAnalytics: 'Participate in Core Analytics',
   copyPhraseButton: 'Copy Phrase',
   firstMnemonicWord: 'rebel',
   lastMnemonicWord: 'embark',

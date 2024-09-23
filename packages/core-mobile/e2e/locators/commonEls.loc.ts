@@ -6,5 +6,7 @@ export default {
   jailbrokenWarning: 'jailbroken_warning__text',
   getStartedBtn: 'Get Started',
   retryBtn: 'Retry',
-  testnetBanner: 'testnet_banner'
+  testnetBanner: 'testnet_banner',
+  disabledSwitch: 'disabled_switch',
+  enabledSwitch: 'enabled_switch'
 }

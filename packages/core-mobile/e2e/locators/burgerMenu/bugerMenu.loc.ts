@@ -8,5 +8,8 @@ export default {
   saveButton: 'Save',
   securityAndPrivacy: 'Security & Privacy',
   showRecoveryPhrase: 'Show recovery phrase',
-  carrotSvg: 'carrot_svg'
+  carrotSvg: 'carrot_svg',
+  sendFeedback: 'Send Feedback',
+  legal: 'Legal',
+  helpCenter: 'Help Center'
 }

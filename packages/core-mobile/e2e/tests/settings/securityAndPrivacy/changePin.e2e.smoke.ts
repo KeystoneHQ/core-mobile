@@ -2,11 +2,11 @@
 /**
  * @jest-environment ./environment.ts
  */
-import Actions from '../../helpers/actions'
-import BurgerMenuPage from '../../pages/burgerMenu/burgerMenu.page'
-import { warmup } from '../../helpers/warmup'
-import CreatePinPage from '../../pages/createPin.page'
-import SecurityAndPrivacyPage from '../../pages/burgerMenu/securityAndPrivacy.page'
+import Actions from '../../../helpers/actions'
+import BurgerMenuPage from '../../../pages/burgerMenu/burgerMenu.page'
+import { warmup } from '../../../helpers/warmup'
+import CreatePinPage from '../../../pages/createPin.page'
+import SecurityAndPrivacyPage from '../../../pages/burgerMenu/securityAndPrivacy.page'
 
 describe('Change Pin', () => {
   beforeAll(async () => {

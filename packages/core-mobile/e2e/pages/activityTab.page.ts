@@ -5,8 +5,6 @@ import Assert from '../helpers/assertions'
 import activityTab from '../locators/activityTab.loc'
 import { Platform } from '../helpers/constants'
 import ReviewAndSend from '../pages/reviewAndSend.page'
-import PortfolioPage from '../pages/portfolio.page'
-import loginRecoverWallet from '../helpers/loginRecoverWallet'
 import BottomsTabsPage from '../pages/bottomTabs.page'
 
 const platformIndex = Action.platform() === Platform.iOS ? 1 : 0
@@ -149,23 +147,6 @@ class ActivityTabPage {
         ReviewAndSend.sendSuccessfulToastMsg
       )
     }
-  }
-
-  async exitTransactionDetailWebBrowser(transactionType: string) {
-    if (device.getPlatform() === 'android') {
-      await device.disableSynchronization()
-      await device.pressBack()
-      await device.enableSynchronization()
-      await Assert.isVisible(AccountManagePage.accountsDropdown)
-      await Assert.isVisible(by.text(transactionType))
-    } else {
-      await device.launchApp({ newInstance: true })
-      await loginRecoverWallet.recoverWalletLogin()
-      await Assert.isVisible(PortfolioPage.colectiblesTab)
-      await Assert.isVisible(PortfolioPage.assetsTab)
-      await Assert.isVisible(PortfolioPage.defiTab)
-    }
-    await Assert.isVisible(BottomsTabsPage.plusIcon)
   }
 
   async getLatestActivityRow() {
